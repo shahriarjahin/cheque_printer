@@ -13,37 +13,37 @@ const DEFAULT_TEMPLATES = {
     fields: {
       date: {
         xMm: 138.0,
-        yMm: 6.5,
+        yMm: 14.5,
         boxWidthMm: 5.4,
         digitCount: 8,
         fontSizePt: 12,
-        mode: 'boxes' // 'boxes' (individual D D M M Y Y Y Y) or 'text'
+        mode: 'boxes'
       },
       payee: {
-        xMm: 33.0,
-        yMm: 23.5,
-        widthMm: 115.0,
+        xMm: 34.0,
+        yMm: 33.0,
+        widthMm: 125.0,
         fontSizePt: 11,
         bold: true,
         prefixAsterisks: true
       },
       amountWordsLine1: {
-        xMm: 42.0,
-        yMm: 30.5,
-        widthMm: 105.0,
+        xMm: 44.0,
+        yMm: 40.5,
+        widthMm: 95.0,
         fontSizePt: 10,
         bold: false
       },
       amountWordsLine2: {
-        xMm: 18.0,
-        yMm: 37.0,
+        xMm: 20.0,
+        yMm: 48.0,
         widthMm: 120.0,
         fontSizePt: 10,
         bold: false
       },
       amountNumber: {
         xMm: 140.0,
-        yMm: 33.5,
+        yMm: 41.5,
         widthMm: 42.0,
         heightMm: 8.5,
         fontSizePt: 12,
@@ -51,16 +51,16 @@ const DEFAULT_TEMPLATES = {
       },
       bearer: {
         xMm: 168.0,
-        yMm: 23.5,
+        yMm: 33.0,
         widthMm: 16.0,
-        strikeYMm: 25.5
+        strikeYMm: 35.0
       },
       acPayee: {
         xMm: 20.0,
-        yMm: 9.0,
+        yMm: 7.0,
         widthMm: 38.0,
         heightMm: 14.0,
-        style: 'lines' // 'lines' (two parallel lines with A/C PAYEE ONLY)
+        style: 'lines'
       }
     }
   },
@@ -73,52 +73,52 @@ const DEFAULT_TEMPLATES = {
     previewImage: 'assets/ibbl_preview.png',
     fields: {
       date: {
-        xMm: 133.5,
-        yMm: 8.5,
+        xMm: 134.0,
+        yMm: 15.5,
         boxWidthMm: 5.3,
         digitCount: 8,
         fontSizePt: 12,
         mode: 'boxes'
       },
       payee: {
-        xMm: 32.0,
-        yMm: 25.0,
-        widthMm: 110.0,
+        xMm: 33.0,
+        yMm: 34.0,
+        widthMm: 120.0,
         fontSizePt: 11,
         bold: true,
         prefixAsterisks: true
       },
       amountWordsLine1: {
-        xMm: 40.0,
-        yMm: 32.5,
-        widthMm: 98.0,
+        xMm: 42.0,
+        yMm: 41.5,
+        widthMm: 92.0,
         fontSizePt: 10,
         bold: false
       },
       amountWordsLine2: {
-        xMm: 16.0,
-        yMm: 39.5,
+        xMm: 18.0,
+        yMm: 49.0,
         widthMm: 118.0,
         fontSizePt: 10,
         bold: false
       },
       amountNumber: {
-        xMm: 136.0,
-        yMm: 34.0,
+        xMm: 138.0,
+        yMm: 42.5,
         widthMm: 42.0,
         heightMm: 8.5,
         fontSizePt: 12,
         bold: true
       },
       bearer: {
-        xMm: 162.0,
-        yMm: 25.0,
+        xMm: 164.0,
+        yMm: 34.0,
         widthMm: 16.0,
-        strikeYMm: 27.0
+        strikeYMm: 36.0
       },
       acPayee: {
-        xMm: 20.0,
-        yMm: 10.0,
+        xMm: 18.0,
+        yMm: 7.0,
         widthMm: 38.0,
         heightMm: 14.0,
         style: 'lines'
@@ -134,38 +134,38 @@ const DEFAULT_TEMPLATES = {
     previewImage: 'assets/sonali_preview.png',
     fields: {
       date: {
-        xMm: 138.5,
-        yMm: 7.0,
-        boxWidthMm: 5.6,
+        xMm: 138.0,
+        yMm: 15.0,
+        boxWidthMm: 5.5,
         digitCount: 8,
         fontSizePt: 12,
         mode: 'boxes'
       },
       payee: {
-        xMm: 32.0,
-        yMm: 24.0,
-        widthMm: 115.0,
+        xMm: 34.0,
+        yMm: 33.5,
+        widthMm: 125.0,
         fontSizePt: 11,
         bold: true,
         prefixAsterisks: true
       },
       amountWordsLine1: {
-        xMm: 40.0,
-        yMm: 31.5,
-        widthMm: 102.0,
+        xMm: 45.0,
+        yMm: 41.5,
+        widthMm: 95.0,
         fontSizePt: 10,
         bold: false
       },
       amountWordsLine2: {
-        xMm: 18.0,
-        yMm: 38.5,
+        xMm: 22.0,
+        yMm: 49.0,
         widthMm: 120.0,
         fontSizePt: 10,
         bold: false
       },
       amountNumber: {
         xMm: 142.0,
-        yMm: 33.0,
+        yMm: 42.5,
         widthMm: 44.0,
         heightMm: 8.5,
         fontSizePt: 12,
@@ -173,13 +173,13 @@ const DEFAULT_TEMPLATES = {
       },
       bearer: {
         xMm: 168.0,
-        yMm: 24.0,
+        yMm: 33.5,
         widthMm: 16.0,
-        strikeYMm: 26.0
+        strikeYMm: 35.5
       },
       acPayee: {
-        xMm: 22.0,
-        yMm: 9.0,
+        xMm: 18.0,
+        yMm: 7.0,
         widthMm: 38.0,
         heightMm: 14.0,
         style: 'lines'
@@ -196,37 +196,37 @@ const DEFAULT_TEMPLATES = {
     fields: {
       date: {
         xMm: 138.0,
-        yMm: 7.0,
+        yMm: 15.0,
         boxWidthMm: 5.5,
         digitCount: 8,
         fontSizePt: 12,
         mode: 'boxes'
       },
       payee: {
-        xMm: 33.0,
-        yMm: 24.0,
-        widthMm: 115.0,
+        xMm: 34.0,
+        yMm: 33.5,
+        widthMm: 125.0,
         fontSizePt: 11,
         bold: true,
         prefixAsterisks: true
       },
       amountWordsLine1: {
-        xMm: 42.0,
-        yMm: 31.0,
-        widthMm: 102.0,
+        xMm: 44.0,
+        yMm: 41.0,
+        widthMm: 95.0,
         fontSizePt: 10,
         bold: false
       },
       amountWordsLine2: {
-        xMm: 18.0,
-        yMm: 38.0,
+        xMm: 20.0,
+        yMm: 48.5,
         widthMm: 120.0,
         fontSizePt: 10,
         bold: false
       },
       amountNumber: {
         xMm: 140.0,
-        yMm: 33.5,
+        yMm: 42.0,
         widthMm: 42.0,
         heightMm: 8.5,
         fontSizePt: 12,
@@ -234,13 +234,13 @@ const DEFAULT_TEMPLATES = {
       },
       bearer: {
         xMm: 166.0,
-        yMm: 24.0,
+        yMm: 33.5,
         widthMm: 16.0,
-        strikeYMm: 26.0
+        strikeYMm: 35.5
       },
       acPayee: {
         xMm: 20.0,
-        yMm: 9.0,
+        yMm: 7.0,
         widthMm: 38.0,
         heightMm: 14.0,
         style: 'lines'

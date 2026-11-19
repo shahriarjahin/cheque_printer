@@ -28,12 +28,14 @@ function testCalibratorMath() {
   assert.strictEqual(Math.round(mm), 10);
 
   console.log('Testing calculateDateBoxPositions...');
-  // 8 boxes starting at x = 138, y = 6.5, boxWidth = 5.4
-  const boxes = calculateDateBoxPositions({ xMm: 138, yMm: 6.5, boxWidthMm: 5.4, digitCount: 8 }, '20112026');
+  // 8 boxes starting at x = 138, y = 15.0, boxWidth = 5.4
+  // '2026-11-20' formats to '20112026' (DDMMYYYY)
+  const boxes = calculateDateBoxPositions({ xMm: 138, yMm: 15.0, boxWidthMm: 5.4, digitCount: 8 }, '2026-11-20');
   assert.strictEqual(boxes.length, 8);
-  assert.strictEqual(boxes[0].digit, '2');
+  assert.strictEqual(boxes[0].digit, '2'); // Day 2
+  assert.strictEqual(boxes[1].digit, '0'); // Day 0
   assert.strictEqual(boxes[0].xMm, 138);
-  assert.strictEqual(boxes[7].digit, '6');
+  assert.strictEqual(boxes[7].digit, '6'); // Year last digit 6
   assert.strictEqual(boxes[7].xMm, 138 + 7 * 5.4);
 
   console.log('All calibrator math tests passed!');

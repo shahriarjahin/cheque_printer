@@ -4,8 +4,8 @@
  */
 
 const STORAGE_KEYS = {
-  TEMPLATES: 'cheque_printer_templates',
-  SETTINGS: 'cheque_printer_settings',
+  TEMPLATES: 'cheque_printer_templates_v2',
+  SETTINGS: 'cheque_printer_settings_v2',
   ACTIVE_TEMPLATE: 'cheque_printer_active_template'
 };
 

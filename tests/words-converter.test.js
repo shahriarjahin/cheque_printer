@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { numberToWordsBDT, formatAmountWords, formatAmountNumber, splitWordsIntoTwoLines } = require('../js/words-converter.js');
+const { numberToWordsBDT, formatAmountWords, formatAmountNumber, splitWordsIntoTwoLines, formatDateToDDMMYYYY } = require('../js/words-converter.js');
 
 function runTests() {
   console.log('Testing numberToWordsBDT...');
@@ -23,8 +23,15 @@ function runTests() {
 
   console.log('Testing formatAmountNumber...');
   assert.strictEqual(formatAmountNumber(50000), '=***50,000/-***');
+  assert.strictEqual(formatAmountNumber('1234567.5'), '=***12,34,567.50/-***');
   assert.strictEqual(formatAmountNumber('1234567.50'), '=***12,34,567.50/-***');
   assert.strictEqual(formatAmountNumber('10000000'), '=***1,00,00,000/-***');
+
+  console.log('Testing formatDateToDDMMYYYY...');
+  assert.strictEqual(formatDateToDDMMYYYY('2026-11-19'), '19112026');
+  assert.strictEqual(formatDateToDDMMYYYY('19-11-2026'), '19112026');
+  assert.strictEqual(formatDateToDDMMYYYY('19/11/2026'), '19112026');
+  assert.strictEqual(formatDateToDDMMYYYY('20261119'), '19112026');
 
   console.log('Testing splitWordsIntoTwoLines...');
   const split1 = splitWordsIntoTwoLines('Fifty Two Lakh Thirty Four Thousand Five Hundred Taka and Fifty Poisha Only', 40);

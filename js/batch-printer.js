@@ -216,8 +216,10 @@ function buildPrintHtml(cheques, template, options = {}) {
       ? wordsModule.splitWordsIntoTwoLines(formattedWords, 45)
       : { line1: formattedWords, line2: '' };
 
-    // Format Date digits
-    const cleanDate = (chk.date || '').replace(/\D/g, '');
+    // Format Date digits (converts YYYY-MM-DD to DDMMYYYY)
+    const cleanDate = wordsModule && wordsModule.formatDateToDDMMYYYY
+      ? wordsModule.formatDateToDDMMYYYY(chk.date)
+      : (chk.date || '').replace(/\D/g, '');
     let dateHtml = '';
 
     if (f.date && f.date.mode === 'boxes') {

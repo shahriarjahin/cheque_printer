@@ -29,11 +29,25 @@ function calculateCenterOffset(chequeDimensionMm, totalWidthMm = 210) {
 /**
  * Calculates discrete positions for 8-digit date boxes (D D M M Y Y Y Y)
  * @param {object} dateConfig
- * @param {string} dateStr (e.g. "20-11-2026" or "20112026")
+ * @param {string} dateStr (e.g. "2026-11-20" or "20-11-2026")
  * @returns {Array<{ digit: string, xMm: number, yMm: number }>}
  */
 function calculateDateBoxPositions(dateConfig, dateStr) {
-  const digits = String(dateStr || '').replace(/\D/g, '').padEnd(dateConfig.digitCount || 8, ' ').split('');
+  let digitsStr = '';
+  if (typeof WordsConverter !== 'undefined' && WordsConverter.formatDateToDDMMYYYY) {
+    digitsStr = WordsConverter.formatDateToDDMMYYYY(dateStr);
+  } else if (typeof require !== 'undefined') {
+    try {
+      const wc = require('./words-converter.js');
+      digitsStr = wc.formatDateToDDMMYYYY(dateStr);
+    } catch(e) {
+      digitsStr = String(dateStr || '').replace(/\D/g, '');
+    }
+  } else {
+    digitsStr = String(dateStr || '').replace(/\D/g, '');
+  }
+
+  const digits = digitsStr.padEnd(dateConfig.digitCount || 8, ' ').split('');
   const result = [];
   const startX = dateConfig.xMm;
   const startY = dateConfig.yMm;

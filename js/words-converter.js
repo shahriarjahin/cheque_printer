@@ -100,7 +100,7 @@ function formatAmountWords(words) {
 
 /**
  * Formats a numeric value with Bangladeshi comma separators and security markers
- * e.g. 5234500 -> "=***52,34,500/-***"
+ * e.g. 5234500.5 -> "=***52,34,500.50/-***"
  * @param {number|string} amount
  * @returns {string}
  */
@@ -111,7 +111,7 @@ function formatAmountNumber(amount) {
 
   const parts = cleanAmount.split('.');
   let integerPart = parts[0];
-  const decimalPart = parts[1];
+  let decimalPart = parts[1];
 
   // Bangladeshi comma grouping: rightmost 3 digits, then groups of 2
   let formatted = '';
@@ -124,10 +124,51 @@ function formatAmountNumber(amount) {
   }
 
   if (decimalPart !== undefined) {
+    // Pad single decimal (e.g. .5 -> .50)
+    decimalPart = decimalPart.padEnd(2, '0').slice(0, 2);
     formatted += '.' + decimalPart;
   }
 
   return `=***${formatted}/-***`;
+}
+
+/**
+ * Formats date input into discrete DDMMYYYY digits for 8-box cheque fields
+ * Handles YYYY-MM-DD, DD-MM-YYYY, DD/MM/YYYY, and raw digits.
+ * @param {string} dateStr
+ * @returns {string} exactly 8 digits (e.g. "19112026")
+ */
+function formatDateToDDMMYYYY(dateStr) {
+  if (!dateStr) return '';
+  const str = String(dateStr).trim();
+
+  // YYYY-MM-DD
+  if (str.includes('-')) {
+    const parts = str.split('-');
+    if (parts.length === 3 && parts[0].length === 4) {
+      return `${parts[2].padStart(2, '0')}${parts[1].padStart(2, '0')}${parts[0]}`;
+    } else if (parts.length === 3 && parts[2].length === 4) {
+      return `${parts[0].padStart(2, '0')}${parts[1].padStart(2, '0')}${parts[2]}`;
+    }
+  }
+
+  // DD/MM/YYYY
+  if (str.includes('/')) {
+    const parts = str.split('/');
+    if (parts.length === 3 && parts[2].length === 4) {
+      return `${parts[0].padStart(2, '0')}${parts[1].padStart(2, '0')}${parts[2]}`;
+    } else if (parts.length === 3 && parts[0].length === 4) {
+      return `${parts[2].padStart(2, '0')}${parts[1].padStart(2, '0')}${parts[0]}`;
+    }
+  }
+
+  const digits = str.replace(/\D/g, '');
+  // If YYYYMMDD (starts with 19xx or 20xx and 8 digits)
+  if (digits.length === 8 && (digits.startsWith('19') || digits.startsWith('20'))) {
+    return `${digits.slice(6, 8)}${digits.slice(4, 6)}${digits.slice(0, 4)}`;
+  }
+
+  return digits.padEnd(8, ' ').slice(0, 8);
 }
 
 /**
@@ -160,7 +201,8 @@ const WordsConverter = {
   numberToWordsBDT,
   formatAmountWords,
   formatAmountNumber,
-  splitWordsIntoTwoLines
+  splitWordsIntoTwoLines,
+  formatDateToDDMMYYYY
 };
 
 if (typeof module !== 'undefined' && module.exports) {
