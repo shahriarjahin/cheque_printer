@@ -277,12 +277,25 @@ function buildPrintHtml(cheques, template, options = {}) {
             </div>
           ` : ''}
 
-          <!-- A/C Payee Crossing -->
-          ${f.acPayee && chk.acPayee !== false ? `
-            <div style="position: absolute; left: ${f.acPayee.xMm.toFixed(2)}mm; top: ${f.acPayee.yMm.toFixed(2)}mm; width: ${(f.acPayee.widthMm || 38).toFixed(2)}mm; border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 1.5px 0; text-align: center; font-weight: bold; font-size: 8pt; letter-spacing: 1px; line-height: 1.1;">
-              A/C PAYEE ONLY
-            </div>
-          ` : ''}
+          <!-- A/C Payee Crossing (Diagonal Top Corner by default) -->
+          ${f.acPayee && chk.acPayee !== false ? (
+            f.acPayee.style === 'diagonal_lines' ? `
+              <svg style="position: absolute; left: ${(f.acPayee.xMm || 0).toFixed(2)}mm; top: ${(f.acPayee.yMm || 0).toFixed(2)}mm; width: ${(f.acPayee.sizeMm || 35).toFixed(2)}mm; height: ${(f.acPayee.sizeMm || 35).toFixed(2)}mm; pointer-events: none;" viewBox="0 0 35 35">
+                <line x1="0" y1="${f.acPayee.line1Start || 19}" x2="${f.acPayee.line1Start || 19}" y2="0" stroke="#000000" stroke-width="0.5" />
+                <line x1="0" y1="${f.acPayee.line2Start || 25}" x2="${f.acPayee.line2Start || 25}" y2="0" stroke="#000000" stroke-width="0.5" />
+              </svg>
+            ` : f.acPayee.style === 'horizontal_box' ? `
+              <div style="position: absolute; left: ${f.acPayee.xMm.toFixed(2)}mm; top: ${f.acPayee.yMm.toFixed(2)}mm; width: ${(f.acPayee.widthMm || 38).toFixed(2)}mm; border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 1.5px 0; text-align: center; font-weight: bold; font-size: 8pt; letter-spacing: 1px; line-height: 1.1;">
+                A/C PAYEE ONLY
+              </div>
+            ` : `
+              <svg style="position: absolute; left: ${(f.acPayee.xMm || 0).toFixed(2)}mm; top: ${(f.acPayee.yMm || 0).toFixed(2)}mm; width: ${(f.acPayee.sizeMm || 35).toFixed(2)}mm; height: ${(f.acPayee.sizeMm || 35).toFixed(2)}mm; pointer-events: none;" viewBox="0 0 35 35">
+                <line x1="0" y1="${f.acPayee.line1Start || 19}" x2="${f.acPayee.line1Start || 19}" y2="0" stroke="#000000" stroke-width="0.5" />
+                <text x="11" y="11" transform="rotate(-45 11 11)" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="2.0" font-weight="bold" letter-spacing="0.2" fill="#000000">A/C PAYEE ONLY</text>
+                <line x1="0" y1="${f.acPayee.line2Start || 25}" x2="${f.acPayee.line2Start || 25}" y2="0" stroke="#000000" stroke-width="0.5" />
+              </svg>
+            `
+          ) : ''}
 
           <!-- Or Bearer Strikethrough -->
           ${f.bearer && chk.crossBearer !== false ? `

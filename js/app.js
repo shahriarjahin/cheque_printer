@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const singleAmountFormatted = document.getElementById('single-amount-formatted');
   const singleWords = document.getElementById('single-words');
   const singleAcPayee = document.getElementById('single-ac-payee');
+  const singleAcStyle = document.getElementById('single-ac-style');
   const singleCrossBearer = document.getElementById('single-cross-bearer');
   const singleBankLabel = document.getElementById('single-bank-label');
   const btnAddToBatch = document.getElementById('btn-add-to-batch');
@@ -218,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
       wordsLine1: split.line1,
       wordsLine2: split.line2,
       acPayee: singleAcPayee.checked,
+      acStyle: singleAcStyle ? singleAcStyle.value : 'diagonal_text',
       crossBearer: singleCrossBearer.checked
     };
   }
@@ -273,9 +275,28 @@ document.addEventListener('DOMContentLoaded', () => {
       html += `<div style="position: absolute; left: ${f.amountNumber.xMm * pxPerMm}px; top: ${f.amountNumber.yMm * pxPerMm}px; font-size: ${(f.amountNumber.fontSizePt || 12) * 0.95}pt; font-weight: bold; font-family: monospace;">${data.amountNumber}</div>`;
     }
 
-    // A/C Payee
+    // A/C Payee (Top-Left Diagonal Corner Crossing)
     if (f.acPayee && data.acPayee) {
-      html += `<div style="position: absolute; left: ${f.acPayee.xMm * pxPerMm}px; top: ${f.acPayee.yMm * pxPerMm}px; width: ${(f.acPayee.widthMm || 38) * pxPerMm}px; border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 1px 0; text-align: center; font-weight: bold; font-size: ${7.5 * 0.95}pt; letter-spacing: 1px;">A/C PAYEE ONLY</div>`;
+      const style = data.acStyle || f.acPayee.style || 'diagonal_text';
+      const s = f.acPayee.sizeMm || 35;
+      const l1 = f.acPayee.line1Start || 19;
+      const l2 = f.acPayee.line2Start || 25;
+
+      if (style === 'horizontal_box') {
+        html += `<div style="position: absolute; left: ${f.acPayee.xMm * pxPerMm}px; top: ${f.acPayee.yMm * pxPerMm}px; width: ${(f.acPayee.widthMm || 38) * pxPerMm}px; border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 1px 0; text-align: center; font-weight: bold; font-size: ${7.5 * 0.95}pt; letter-spacing: 1px;">A/C PAYEE ONLY</div>`;
+      } else {
+        html += `
+          <div style="position: absolute; left: ${(f.acPayee.xMm || 0) * pxPerMm}px; top: ${(f.acPayee.yMm || 0) * pxPerMm}px; width: ${s * pxPerMm}px; height: ${s * pxPerMm}px; pointer-events: none;">
+            <svg style="width: 100%; height: 100%;" viewBox="0 0 ${s} ${s}">
+              <line x1="0" y1="${l1}" x2="${l1}" y2="0" stroke="#000000" stroke-width="0.5" />
+              ${style === 'diagonal_lines' ? '' : `
+                <text x="11" y="11" transform="rotate(-45 11 11)" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="2.0" font-weight="bold" letter-spacing="0.2" fill="#000000">A/C PAYEE ONLY</text>
+              `}
+              <line x1="0" y1="${l2}" x2="${l2}" y2="0" stroke="#000000" stroke-width="0.5" />
+            </svg>
+          </div>
+        `;
+      }
     }
 
     // Bearer
@@ -437,7 +458,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Single Form Real-time Binding
-    [singleDate, singlePayee, singleAmount, singleAcPayee, singleCrossBearer].forEach(el => {
+    [singleDate, singlePayee, singleAmount, singleAcPayee, singleAcStyle, singleCrossBearer].forEach(el => {
+      if (!el) return;
       el.addEventListener('input', () => {
         updateAmountWords();
         renderSinglePreview();
@@ -446,6 +468,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+    if (singleAcStyle) {
+      singleAcStyle.addEventListener('change', () => {
+        renderSinglePreview();
+        if (currentTemplate && currentTemplate.fields.acPayee) {
+          currentTemplate.fields.acPayee.style = singleAcStyle.value;
+          if (calibrator) calibrator.setTemplate(currentTemplate);
+        }
+      });
+    }
 
     // Single Form Actions
     btnAddToBatch.addEventListener('click', () => {

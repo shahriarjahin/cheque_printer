@@ -344,21 +344,40 @@ class Calibrator {
       this.fieldsLayer.appendChild(numEl);
     }
 
-    // 6. A/C Payee Crossing
+    // 6. A/C Payee Crossing (Top-left diagonal corner or horizontal)
     if (fields.acPayee && data.acPayee !== false) {
       const acEl = document.createElement('div');
       acEl.className = `calibrator-field ${this.selectedField === 'acPayee' ? 'selected' : ''}`;
       acEl.dataset.field = 'acPayee';
       acEl.style.position = 'absolute';
-      acEl.style.left = `${fields.acPayee.xMm * pxPerMm}px`;
-      acEl.style.top = `${fields.acPayee.yMm * pxPerMm}px`;
-      acEl.style.width = `${(fields.acPayee.widthMm || 38) * pxPerMm}px`;
+      acEl.style.left = `${(fields.acPayee.xMm || 0) * pxPerMm}px`;
+      acEl.style.top = `${(fields.acPayee.yMm || 0) * pxPerMm}px`;
+      acEl.style.width = `${(fields.acPayee.sizeMm || 35) * pxPerMm}px`;
+      acEl.style.height = `${(fields.acPayee.sizeMm || 35) * pxPerMm}px`;
       acEl.style.cursor = 'move';
-      acEl.innerHTML = `
-        <div style="border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 2px 0; text-align: center; font-weight: bold; font-size: ${8 * this.zoom}pt; letter-spacing: 1px;">
-          A/C PAYEE ONLY
-        </div>
-      `;
+
+      const s = fields.acPayee.sizeMm || 35;
+      const l1 = fields.acPayee.line1Start || 19;
+      const l2 = fields.acPayee.line2Start || 25;
+
+      if (fields.acPayee.style === 'horizontal_box') {
+        acEl.style.height = 'auto';
+        acEl.innerHTML = `
+          <div style="border-top: 1.5px solid #000; border-bottom: 1.5px solid #000; padding: 2px 0; text-align: center; font-weight: bold; font-size: ${8 * this.zoom}pt; letter-spacing: 1px;">
+            A/C PAYEE ONLY
+          </div>
+        `;
+      } else {
+        acEl.innerHTML = `
+          <svg style="width: 100%; height: 100%; pointer-events: none;" viewBox="0 0 ${s} ${s}">
+            <line x1="0" y1="${l1}" x2="${l1}" y2="0" stroke="#000000" stroke-width="0.5" />
+            ${fields.acPayee.style === 'diagonal_lines' ? '' : `
+              <text x="11" y="11" transform="rotate(-45 11 11)" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="2.0" font-weight="bold" letter-spacing="0.2" fill="#000000">A/C PAYEE ONLY</text>
+            `}
+            <line x1="0" y1="${l2}" x2="${l2}" y2="0" stroke="#000000" stroke-width="0.5" />
+          </svg>
+        `;
+      }
       this.fieldsLayer.appendChild(acEl);
     }
 

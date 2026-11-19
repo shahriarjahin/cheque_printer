@@ -56,11 +56,12 @@ const DEFAULT_TEMPLATES = {
         strikeYMm: 35.0
       },
       acPayee: {
-        xMm: 20.0,
-        yMm: 7.0,
-        widthMm: 38.0,
-        heightMm: 14.0,
-        style: 'lines'
+        xMm: 0.0,
+        yMm: 0.0,
+        sizeMm: 35.0,
+        style: 'diagonal_text', // 'diagonal_text', 'diagonal_lines', 'horizontal_box'
+        line1Start: 19.0,
+        line2Start: 25.0
       }
     }
   },
@@ -117,11 +118,12 @@ const DEFAULT_TEMPLATES = {
         strikeYMm: 36.0
       },
       acPayee: {
-        xMm: 18.0,
-        yMm: 7.0,
-        widthMm: 38.0,
-        heightMm: 14.0,
-        style: 'lines'
+        xMm: 0.0,
+        yMm: 0.0,
+        sizeMm: 35.0,
+        style: 'diagonal_text',
+        line1Start: 19.0,
+        line2Start: 25.0
       }
     }
   },
@@ -178,11 +180,12 @@ const DEFAULT_TEMPLATES = {
         strikeYMm: 35.5
       },
       acPayee: {
-        xMm: 18.0,
-        yMm: 7.0,
-        widthMm: 38.0,
-        heightMm: 14.0,
-        style: 'lines'
+        xMm: 0.0,
+        yMm: 0.0,
+        sizeMm: 35.0,
+        style: 'diagonal_text',
+        line1Start: 19.0,
+        line2Start: 25.0
       }
     }
   },
@@ -239,11 +242,12 @@ const DEFAULT_TEMPLATES = {
         strikeYMm: 35.5
       },
       acPayee: {
-        xMm: 20.0,
-        yMm: 7.0,
-        widthMm: 38.0,
-        heightMm: 14.0,
-        style: 'lines'
+        xMm: 0.0,
+        yMm: 0.0,
+        sizeMm: 35.0,
+        style: 'diagonal_text', // 'diagonal_text', 'diagonal_lines', 'horizontal_box'
+        line1Start: 19.0,
+        line2Start: 25.0
       }
     }
   }
