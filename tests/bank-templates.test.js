@@ -6,8 +6,8 @@ function testTemplates() {
   console.log('Testing DEFAULT_TEMPLATES...');
   // NRBC
   assert.ok(DEFAULT_TEMPLATES.nrbc, 'NRBC template must exist');
-  assert.strictEqual(DEFAULT_TEMPLATES.nrbc.widthMm, 187.1);
-  assert.strictEqual(DEFAULT_TEMPLATES.nrbc.heightMm, 82.1);
+  assert.strictEqual(DEFAULT_TEMPLATES.nrbc.widthMm, 189.0);
+  assert.strictEqual(DEFAULT_TEMPLATES.nrbc.heightMm, 89.0);
   assert.ok(DEFAULT_TEMPLATES.nrbc.fields.date);
   assert.strictEqual(DEFAULT_TEMPLATES.nrbc.fields.date.digitCount, 8);
   assert.ok(DEFAULT_TEMPLATES.nrbc.fields.payee);
@@ -19,16 +19,18 @@ function testTemplates() {
 
   // IBBL
   assert.ok(DEFAULT_TEMPLATES.ibbl, 'IBBL template must exist');
-  assert.strictEqual(DEFAULT_TEMPLATES.ibbl.widthMm, 181.6);
-  assert.strictEqual(DEFAULT_TEMPLATES.ibbl.heightMm, 81.8);
+  assert.strictEqual(DEFAULT_TEMPLATES.ibbl.widthMm, 189.0);
+  assert.strictEqual(DEFAULT_TEMPLATES.ibbl.heightMm, 88.0);
 
   // Sonali
   assert.ok(DEFAULT_TEMPLATES.sonali, 'Sonali template must exist');
-  assert.strictEqual(DEFAULT_TEMPLATES.sonali.widthMm, 190.6);
-  assert.strictEqual(DEFAULT_TEMPLATES.sonali.heightMm, 84.4);
+  assert.strictEqual(DEFAULT_TEMPLATES.sonali.widthMm, 187.0);
+  assert.strictEqual(DEFAULT_TEMPLATES.sonali.heightMm, 87.5);
 
   // Generic
   assert.ok(DEFAULT_TEMPLATES.generic, 'Generic template must exist');
+  assert.strictEqual(DEFAULT_TEMPLATES.generic.widthMm, 189.0);
+  assert.strictEqual(DEFAULT_TEMPLATES.generic.heightMm, 88.0);
 
   console.log('Testing StorageManager...');
   // Mock localStorage for Node test

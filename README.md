@@ -7,10 +7,10 @@ A 100% client-side, zero-dependency Bank Cheque Printing Web Application built i
 ## 🌟 Highlights
 
 - **Pre-calibrated Bangladeshi Bank Presets**:
-  - **NRBC Bank PLC** (187.1 mm × 82.1 mm)
-  - **Islami Bank Bangladesh Limited (IBBL)** (181.6 mm × 81.8 mm)
-  - **Sonali Bank Limited** (190.6 mm × 84.4 mm)
-  - **Standard Generic Cheque** (customizable for any bank)
+  - **NRBC Bank PLC** (189.0 mm × 89.0 mm)
+  - **Islami Bank Bangladesh Limited (IBBL)** (189.0 mm × 88.0 mm)
+  - **Sonali Bank Limited (SBL)** (187.0 mm × 87.5 mm)
+  - **Standard Generic Cheque** (189.0 mm × 88.0 mm, customizable for any bank)
 - **Canon G3010 / Center-Feed Support**:
   - Automatically calculates center alignment (`X offset = (210mm - cheque_width) / 2`) matching Canon G3010 rear tray center sliding guides.
   - Also supports A4 carrier sheets (top-left) and direct custom size envelope feeders.

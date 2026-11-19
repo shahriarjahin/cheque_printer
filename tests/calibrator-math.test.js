@@ -4,21 +4,21 @@ const { calculateCenterOffset, mmToPx, pxToMm, calculateDateBoxPositions } = req
 function testCalibratorMath() {
   console.log('Testing calculateCenterOffset...');
   // A4 paper is 210mm wide.
-  // NRBC is 187.1mm wide -> (210 - 187.1) / 2 = 11.45mm
-  const nrbcOffset = calculateCenterOffset(187.1, 210);
-  assert.strictEqual(Math.round(nrbcOffset * 100) / 100, 11.45);
+  // NRBC is 189.0mm wide -> (210 - 189.0) / 2 = 10.5mm
+  const nrbcOffset = calculateCenterOffset(189.0, 210);
+  assert.strictEqual(Math.round(nrbcOffset * 100) / 100, 10.5);
 
-  // IBBL is 181.6mm wide -> (210 - 181.6) / 2 = 14.2mm
-  const ibblOffset = calculateCenterOffset(181.6, 210);
-  assert.strictEqual(Math.round(ibblOffset * 100) / 100, 14.2);
+  // IBBL is 189.0mm wide -> (210 - 189.0) / 2 = 10.5mm
+  const ibblOffset = calculateCenterOffset(189.0, 210);
+  assert.strictEqual(Math.round(ibblOffset * 100) / 100, 10.5);
 
-  // Sonali is 190.6mm wide -> (210 - 190.6) / 2 = 9.7mm
-  const sonaliOffset = calculateCenterOffset(190.6, 210);
-  assert.strictEqual(Math.round(sonaliOffset * 100) / 100, 9.7);
+  // Sonali is 187.0mm wide -> (210 - 187.0) / 2 = 11.5mm
+  const sonaliOffset = calculateCenterOffset(187.0, 210);
+  assert.strictEqual(Math.round(sonaliOffset * 100) / 100, 11.5);
 
   // Vertical feeding: (210 - height) / 2
-  const nrbcVerticalOffset = calculateCenterOffset(82.1, 210);
-  assert.strictEqual(Math.round(nrbcVerticalOffset * 100) / 100, 63.95);
+  const nrbcVerticalOffset = calculateCenterOffset(89.0, 210);
+  assert.strictEqual(Math.round(nrbcVerticalOffset * 100) / 100, 60.5);
 
   console.log('Testing mm to px conversions...');
   // 96 DPI: 1 inch = 25.4mm = 96px => 1mm = 96 / 25.4 = 3.7795px
